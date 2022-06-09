@@ -30,5 +30,5 @@ En esta sección presentamos el resumen de todos los indicadores construidos has
 
 | Mes | Código | Indicador | SCLData
 | :---: | :--- | :--- | :--- | 
-| Junio |[Script Junio](https://github.com/BID-DATA/newsletter_scl/blob/main/monthly%20figure_may.R)|[Evolución pobreza América Latina (1997 vs 2021)](https://github.com/BID-DATA/newsletter_scl/blob/main/Output/Poverty_evolution.jpg)|[Link al indicador](https://scldata.iadb.org/en/public/query-builder?collections=Household+Socio-Economic+Surveys&indicators=pobreza) | 
+| Junio |[Script Junio](https://github.com/BID-DATA/newsletter_scl/blob/main/monthly%20figure_june.R)|[Evolución pobreza América Latina (1997 vs 2021)](https://github.com/BID-DATA/newsletter_scl/blob/main/Output/Poverty_evolution.jpg)|[Link al indicador](https://scldata.iadb.org/en/public/query-builder?collections=Household+Socio-Economic+Surveys&indicators=pobreza) | 
 
