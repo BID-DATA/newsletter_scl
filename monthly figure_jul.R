@@ -39,13 +39,15 @@ tasa_desocupacion_plot <- ggplot(tasa_desocupacion_table %>%
                                 slice(which.max(year)) %>% 
                                 arrange(man)) +
   geom_segment(aes(x = fct_reorder(isoalpha3, woman), xend=fct_reorder(isoalpha3, woman), y=man, yend = woman), color = "dark grey") +
-  geom_point(aes(x=isoalpha3, y=man, color = "man"),  size=4, alpha = .8) +
+  geom_point(aes(x=isoalpha3, y=man, color = "man"),  size=1.5, alpha = .8) +
   geom_text(data  = tasa_desocupacion_table %>%
               group_by(isoalpha3) %>% 
               slice(which.min(year)),
             aes(x=isoalpha3, y=gap_pos, label=comma(gap,accuracy = .1)),
-            family = 'Century Gothic') +
-  geom_point(aes(x=isoalpha3, y=woman, color = "woman"),  size=4, alpha = .8) +
+            family = 'Century Gothic', 
+            nudge_x = .3,
+            size = 2) +
+  geom_point(aes(x=isoalpha3, y=woman, color = "woman"),  size=2, alpha = .8) +
   labs(title = "Difference in unemployment rate in Latin American countries by gender",
        caption = "Source: Inter-American Development Bank. Household Surveys Indicators of Latin America and the Caribbean. 
                   Gap is computed as the difference between male's and female's value in percentage points.
@@ -55,14 +57,14 @@ tasa_desocupacion_plot <- ggplot(tasa_desocupacion_table %>%
         axis.title.x = element_blank(), 
         legend.title=element_blank(),panel.background = element_blank(),
         axis.text.x = element_text(angle = 90),
-        axis.text = element_text(size = 10, color = "#000f1c", face = "bold", family = 'Century Gothic'),
-        legend.text = element_text(size = 10, color = "#000f1c", face = "bold", family = 'Century Gothic'),
+        axis.text = element_text(size = 6, color = "#000f1c", face = "bold", family = 'Century Gothic'),
+        legend.text = element_text(size = 6, color = "#000f1c", face = "bold", family = 'Century Gothic'),
         panel.grid.major = element_line(colour = "#D3D3D3"),
-        text = element_text(size = 10, color = "#000f1c", face = "bold", family = 'Century Gothic')) +
+        text = element_text(size = 6, color = "#000f1c", face = "bold", family = 'Century Gothic')) +
   scale_color_manual(values = colors_sex) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   coord_flip()
   
 print(tasa_desocupacion_plot)
 
-ggsave(plot = tasa_desocupacion_plot, file = "Output/Unemployment_rate_gender.jpg", height = 15, width = 20, units = "cm")
+ggsave(plot = tasa_desocupacion_plot, file = "Output/Unemployment_rate_gender.jpg", height = 10, width = 12, units = "cm")
