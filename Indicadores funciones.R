@@ -15,6 +15,7 @@ library(geofacet)
 library(scales)
 library(RColorBrewer)
 library(scldataR)
+library(idbsocialdataR)
 library(dplyr)
 
 ##### Preliminares y colores #####
