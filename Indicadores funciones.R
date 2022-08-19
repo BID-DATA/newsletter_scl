@@ -4,7 +4,8 @@
 
 ##### Librerias #####
 
-devtools::install_github("EL-BID/idbsocialdataR", force = TRUE)
+#install indicators from SCLData
+#devtools::install_github("EL-BID/idbsocialdataR", force = TRUE)
 
 library(ggplot2)
 library(tidyverse)
@@ -20,10 +21,9 @@ library(dplyr)
 
 ##### Preliminares y colores #####
 
+#Define colors
 colors_pal <- c('#17406D','#0F6FC6','#5FF3CB', '#009DD9','#FEA300', '#A5C249','#176A7B','#0BD0D9',
                 '#10CF9B', '#FA5F00','#C8DA92','#CC0066')
-
-barplot(rep(1,length(colors_pal)), col=colors_pal)
 
 countries_color <- sample(colors_pal, 12, replace = FALSE)
 
