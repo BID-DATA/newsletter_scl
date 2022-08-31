@@ -108,7 +108,8 @@ yearstart='1995'
 yearend='2020'
 
 #Select only countries that have censuses for all decades (to have comparable sample)
-paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'HND', 'MEX', 'PAN', 'PRY', 'TTO', 'VEN')
+paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'MEX', 'PAN', 'PRY', 'VEN', 'TTO')
+
 
 # Filter calculations for women
 tasa_part_woman <- tasa_participacion %>% 
@@ -173,7 +174,8 @@ tasa_part_lac <- tasa_participacion %>%
   group_by(isoalpha3, sex, indicator) %>% 
   mutate(label = case_when(year == max(year) ~ as.character(percent(value, accuracy = .1)), 
                            year == min(year) ~ as.character(percent(value, accuracy = .1)),
-                           year == mean(year) ~ as.character(percent(value, accuracy = .1))))
+                           year == mean(year) ~ as.character(percent(value, accuracy = .1)),
+                           year == 2019 ~ as.character(percent(value, accuracy = .1))))
 # Reshape data
 tasa_part_table <- tasa_part_lac %>% 
   pivot_wider(names_from = sex)
@@ -200,7 +202,7 @@ tasa_part_table <- tasa_part_lac %>%
                   Harmonized Household Surveys.
                   LAC average is computed as a simple average. 
                   For censuses we group available censuses by decade, and then compute LAC's average as a simple average for each decade with the available countries.
-                  To have a balanced sample between countries, we use the same 12 countries throughout the period; using a lineal interpolation to complete missing points between years."),200) +
+                  To have a balanced sample between countries, we use the same 11 countries throughout the period; using a lineal interpolation to complete missing points between years."),200) +
   # Add format
   theme(legend.position="bottom", 
         axis.title.y = element_blank(),
