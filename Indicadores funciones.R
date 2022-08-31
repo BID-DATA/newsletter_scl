@@ -198,3 +198,55 @@ print(ggp_mul)
 
 }
   
+##### Gráfica de etinicidad ######
+
+gg_evo_eth <- function(dat, x.var, y.var, group.var)
+  
+{
+  
+  aux_evo_min <- dat %>%
+    group_by(isoalpha3, ethnicity) %>%
+    slice(which.min(year))
+  
+  aux_evo_max <- dat %>%
+    group_by(isoalpha3, ethnicity) %>%
+    slice(which.max(year))
+  
+  aux_label <- dat %>% 
+    group_by(isoalpha3, ethnicity) %>% 
+    mutate(label = ifelse(year == min(year) | year == max(year), percent(value, accuracy = .1), ""))
+  
+  gg_evo_plot <- dat %>%  ggplot(aes(x = x.var, y = y.var, group = group.var)) +
+    geom_line(aes(color =group.var), size =1) +
+    geom_point(aes(color =group.var), size =1.5) +
+    scale_color_manual(values = colors_pal) +
+    theme_minimal() +
+    geom_text(data = aux_label, aes(x = year, y = value, label = label, color = group.var), 
+                    size = 3, 
+                    nudge_y = -.002,
+                    nudge_x = .5,
+                 #   segment.size = .25,
+                  #  segment.alpha = .8,
+                   # min.segment.length = unit(0, 'lines'), 
+                    #max.overlaps = Inf,
+                    family = 'Century Gothic') +
+    labs(title = str_wrap(label_en, 100)) +
+    theme(panel.grid = element_blank(),
+          panel.background = element_rect(fill = '#fafafa', color = 'white'),
+          strip.background = element_rect(fill = '#fafafa', color = 'white'),
+          strip.text = element_text(family = 'Century Gothic', color = '#002126'),
+          legend.position = 'bottom',
+          legend.title = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text = element_text(family = 'Century Gothic', color = '#002126'),
+          text = element_text(family = 'Century Gothic', color = '#002126'),
+          axis.text.x = element_text(angle = 90),
+          plot.title = element_text(hjust = 0.5, face = 'bold'),
+          plot.caption = element_text(hjust = 0),
+          NULL) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+    scale_x_continuous(breaks = seq(from =2006, to =2020, by =2))
+  
+  print(gg_evo_plot) 
+} 
