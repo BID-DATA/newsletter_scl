@@ -217,12 +217,12 @@ gg_evo_eth <- function(dat, x.var, y.var, group.var)
     mutate(label = ifelse(year == min(year) | year == max(year), percent(value, accuracy = .1), ""))
   
   gg_evo_plot <- dat %>%  ggplot(aes(x = x.var, y = y.var, group = group.var)) +
-    geom_line(aes(color =group.var), size =1) +
-    geom_point(aes(color =group.var), size =1.5) +
+    geom_line(aes(color =group.var), size =.5) +
+    geom_point(aes(color =group.var), size =.2) +
     scale_color_manual(values = colors_pal) +
     theme_minimal() +
     geom_text(data = aux_label, aes(x = year, y = value, label = label, color = group.var), 
-                    size = 3, 
+                    size = 1.5, 
                     nudge_y = -.002,
                     nudge_x = .5,
                  #   segment.size = .25,
@@ -230,7 +230,8 @@ gg_evo_eth <- function(dat, x.var, y.var, group.var)
                    # min.segment.length = unit(0, 'lines'), 
                     #max.overlaps = Inf,
                     family = 'Century Gothic') +
-    labs(title = str_wrap(label_en, 100)) +
+   # labs(title = str_wrap(dat$label_en, 100), 
+    #     family = 'Century Gothic') +
     theme(panel.grid = element_blank(),
           panel.background = element_rect(fill = '#fafafa', color = 'white'),
           strip.background = element_rect(fill = '#fafafa', color = 'white'),
@@ -239,7 +240,8 @@ gg_evo_eth <- function(dat, x.var, y.var, group.var)
           legend.title = element_blank(),
           axis.title.x = element_blank(),
           axis.title.y = element_blank(),
-          axis.text = element_text(family = 'Century Gothic', color = '#002126'),
+          axis.text = element_text(family = 'Century Gothic', color = '#002126',
+                                   size = 4),
           text = element_text(family = 'Century Gothic', color = '#002126'),
           axis.text.x = element_text(angle = 90),
           plot.title = element_text(hjust = 0.5, face = 'bold'),
