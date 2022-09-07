@@ -117,7 +117,8 @@ paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'HND', 'MEX', 'PAN'
 
 # Filter calculations for women
 tasa_part_woman <- tasa_participacion %>% 
-  filter(age == "Total") %>% 
+ # filter(age == "Total") %>% 
+  filter(age == "15_64") %>%
   filter(source != "IPUMS") %>% 
   select(dt, iddate, year, idgeo, isoalpha3, source, indicator, sex, area, value, se, cv, sample, label_en, label_es, collection_es,collection_en,
          theme_es,theme_en, valuetype, country_name_en,country_name_es) %>% 
@@ -126,7 +127,8 @@ tasa_part_woman <- tasa_participacion %>%
 
 #Filter calculations for men
 tasa_part_man <- tasa_participacion %>% 
-  filter(age == "Total") %>% 
+  filter(age == "15_64") %>% # filtrar para la población de 15 a 64
+#  filter(age == "Total") %>% # cuando se quiere el total de la población
   filter(source != "IPUMS") %>% 
   select(dt, iddate, year, idgeo, isoalpha3, source, indicator, sex, area, value, se, cv, sample, label_en, label_es, collection_es,collection_en,
          theme_es,theme_en, valuetype, country_name_en,country_name_es) %>% 
@@ -160,7 +162,8 @@ tasa_part_hs <- tasa_part_filled %>%
 #Select only censuses 
 tasa_part_lac <- tasa_participacion %>%
   filter(source == "IPUMS" & area == "Total" & sex != "Total") %>% 
-  filter(age == "Total") %>% 
+  filter(age == "15_64") %>% # filtrar para la población de 15 a 64
+#  filter(age == "Total") %>% cuando se quiere calcular para el total
   select(-dt) %>%  
   filter(isoalpha3 %in% paises_censos) %>% 
   filter(year>=1970 & year<2010) %>% 
@@ -206,7 +209,7 @@ tasa_part_table <- tasa_part_lac %>%
                   Harmonized Household Surveys.
                   LAC average is computed as a simple average. 
                   For censuses we group available censuses by decade, and then compute LAC's average as a simple average for each decade with the available countries.
-                  To have a balanced sample between countries, we use the same 11 countries throughout the period; using a lineal interpolation to complete missing points between years."),200) +
+                  To have a balanced sample between countries, we use the same 12 countries throughout the period; using a lineal interpolation to complete missing points between years."),200) +
   # Add format
   theme(legend.position="bottom", 
         axis.title.y = element_blank(),
