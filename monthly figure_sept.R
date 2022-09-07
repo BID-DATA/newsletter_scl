@@ -26,6 +26,9 @@ tasa_participacion <- scldataR::query_indicator(indicator = c('tasa_participacio
                                                 yearstart = 1960,
                                                 yearend = 2021) 
 
+tasa_part <- tasa_participacion %>% 
+  select(-valuetype) %>% 
+  distinct()
 
 ##### Función fill #####
 #Create function to fill all years/countries
@@ -108,7 +111,8 @@ yearstart='1995'
 yearend='2020'
 
 #Select only countries that have censuses for all decades (to have comparable sample)
-paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'MEX', 'PAN', 'PRY', 'VEN', 'TTO')
+paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'HND', 'MEX', 'PAN', 'PRY', 'TTO', 'VEN')
+#paises_censos <- c('ARG', 'BRA', 'CHL', 'COL', 'ECU', 'GTM', 'MEX', 'PAN', 'PRY', 'VEN', 'TTO')
 
 
 # Filter calculations for women
@@ -156,7 +160,7 @@ tasa_part_hs <- tasa_part_filled %>%
 #Select only censuses 
 tasa_part_lac <- tasa_participacion %>%
   filter(source == "IPUMS" & area == "Total" & sex != "Total") %>% 
-  filter(age == "15_64") %>% 
+  filter(age == "Total") %>% 
   select(-dt) %>%  
   filter(isoalpha3 %in% paises_censos) %>% 
   filter(year>=1970 & year<2010) %>% 
